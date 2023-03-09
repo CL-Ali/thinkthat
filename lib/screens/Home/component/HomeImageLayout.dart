@@ -8,9 +8,11 @@ import 'package:thinkthat/utils/constant.dart';
 
 class ImageScreen extends StatefulWidget {
   final bool isCreateImage;
+  final bool isGalleryImage;
   final Post? post;
 
-  ImageScreen({this.isCreateImage = false, this.post});
+  ImageScreen(
+      {this.isGalleryImage = false, this.isCreateImage = false, this.post});
 
   @override
   State<ImageScreen> createState() => _ImageScreenState();
@@ -71,47 +73,59 @@ class _ImageScreenState extends State<ImageScreen> {
             //       ),
             //     ],
             //   )
-            widget.isCreateImage
+            widget.isCreateImage && !widget.isGalleryImage
                 ? ImageOnTapLayout(
-                    post: widget.post!, color: Colors.transparent)
-                : ListView(
-                    children: [
-                      Container(
-                        height: 400,
-                        width: double.infinity,
-                        child: ImageOnTapLayout(
-                            isHomeImage: true,
-                            post: widget.post!,
-                            color: Colors.black),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.all(18),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.post!.title,
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                    post: widget.post!,
+                    isPop: true,
+                    color: Colors.transparent,
+                  )
+                : widget.isGalleryImage
+                    ? ImageOnTapLayout(
+                        isHomeImage: true,
+                        isGalleryImage: true,
+                        isPop: true,
+                        post: widget.post!,
+                        color: Colors.black)
+                    : ListView(
+                        children: [
+                          Container(
+                            height: 400,
+                            width: double.infinity,
+                            child: ImageOnTapLayout(
+                                isHomeImage: true,
+                                isGalleryImage: true,
+                                post: widget.post!,
+                                color: Colors.black),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.all(18),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.post!.title,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  widget.post!.prompt,
+                                  style: TextStyle(
+                                      fontSize: 15, color: Colors.grey),
+                                ),
+                              ],
                             ),
-                            SizedBox(height: 10),
-                            Text(
-                              widget.post!.prompt,
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.grey),
-                            ),
-                          ],
-                        ),
+                          ),
+                          GalleryLayout(
+                            size: MediaQuery.of(context).size,
+                            isSearching: false,
+                            // isphysics: false,
+                            list: suggestionList,
+                          )
+                        ],
                       ),
-                      GalleryLayout(
-                        size: MediaQuery.of(context).size,
-                        isSearching: false,
-                        // isphysics: false,
-                        list: suggestionList,
-                      )
-                    ],
-                  ),
       ),
     );
   }

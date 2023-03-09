@@ -30,12 +30,12 @@ class ImageLayout extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => ImageScreen(
-                              post: post,
-                              isCreateImage: isCreatePrompt == null
-                                  ? false
-                                  : isCreatePrompt!
-                                      ? true
-                                      : false,
+                            post: post,
+                            isCreateImage:
+                                isCreatePrompt == null ? false : isCreatePrompt!
+
+                            // ? true
+                            // : false,
                             )));
               },
               child: isCreatePrompt == null || !isCreatePrompt!

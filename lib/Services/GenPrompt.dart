@@ -14,8 +14,10 @@ class GenPromptApi {
     );
 
     if (response.statusCode == 200) {
+      print('generated');
       return response.body;
     } else {
+      print('error generated');
       return response.body;
     }
   }

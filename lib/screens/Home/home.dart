@@ -54,12 +54,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => CreatePrompt()));
-          },
-          child: Icon(Icons.add),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+        floatingActionButton: Container(
+          height: 80,
+          width: 80,
+          child: FloatingActionButton(
+            // backgroundColor: Colors.orange.withOpacity(0.8),
+            backgroundColor: Colors.white,
+            isExtended: true,
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CreatePrompt()));
+            },
+            child: Icon(
+              Icons.add,
+              color: Colors.black,
+              size: 40,
+            ),
+          ),
         ),
       ),
     );
@@ -82,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // ?
                 Container(
                     alignment: Alignment.centerLeft,
-                    child: Text('ThinkIt',
+                    child: Text('ThinkThat',
                         style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,

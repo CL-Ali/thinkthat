@@ -41,7 +41,10 @@ dependencies:
   transparent_image: 
   path_provider:
   permission_handler:
-  image_picker:
+  # photo_gallery: ^1.1.1
+  photo_manager:
+  connectivity:
+  open_file:
 dev_dependencies:
   flutter_test:
     sdk: flutter

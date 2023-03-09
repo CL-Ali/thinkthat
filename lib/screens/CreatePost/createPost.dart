@@ -4,8 +4,11 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart';
+import 'package:thinkthat/Services/Community.dart';
 import 'package:thinkthat/Services/GenPrompt.dart';
 import 'package:thinkthat/models/promptModel.dart';
+import 'package:thinkthat/screens/Home/home.dart';
 import 'package:thinkthat/utils/imageLayout.dart';
 
 import '../../utils/constant.dart';
@@ -20,6 +23,7 @@ class CreatePrompt extends StatefulWidget {
 class _CreatePromptState extends State<CreatePrompt> {
   bool isGenerating = false;
   bool isSharing = false;
+  bool isShared = false;
   bool isGenerated = false;
   String name = '';
   String prompt = '';
@@ -162,21 +166,48 @@ class _CreatePromptState extends State<CreatePrompt> {
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.green),
-                                  onPressed:
-                                      name == '' || name.isEmpty || !isGenerated
-                                          ? null
-                                          : () {
+                                  onPressed: name == '' ||
+                                          name.isEmpty ||
+                                          !isGenerated ||
+                                          isSharing
+                                      ? null
+                                      : () async {
+                                          bool isDone = false;
+                                          try {
+                                            if (!isDone) {
                                               setState(() {
-                                                String base64String =
-                                                    "data:image/png;base64,$responsePrompt";
-                                                Clipboard.setData(ClipboardData(
-                                                    text: base64String));
-
-                                                print(base64String);
-                                                isSharing =
-                                                    isSharing ? false : true;
+                                                isDone = false;
+                                                isShared = false;
+                                                isSharing = true;
                                               });
-                                            },
+                                              String base64String =
+                                                  "data:image/jpeg;base64,$responsePrompt";
+                                              await CommunityApi.postPromptApi(
+                                                  Post(
+                                                      imageUrl: base64String,
+                                                      title: name,
+                                                      prompt: prompt));
+
+                                              setState(() {
+                                                isDone = true;
+                                                isShared = true;
+                                                isSharing = false;
+                                              });
+                                              Navigator.pushAndRemoveUntil(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          HomeScreen()),
+                                                  (route) => false);
+                                            }
+                                          } catch (e) {
+                                            setState(() {
+                                              isDone = false;
+                                              isShared = false;
+                                              isSharing = false;
+                                            });
+                                          }
+                                        },
                                   child: Text(isSharing
                                       ? 'Sharing with Community...'
                                       : 'Share with Community')),
