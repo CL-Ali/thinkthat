@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
@@ -29,6 +30,8 @@ class _CreatePromptState extends State<CreatePrompt> {
   bool isGenerated = false;
   String name = '';
   String prompt = '';
+  TextEditingController nameController = TextEditingController();
+  TextEditingController promptController = TextEditingController();
   var bytes;
   String responsePrompt = '';
   @override
@@ -88,6 +91,16 @@ class _CreatePromptState extends State<CreatePrompt> {
                               child: CustomTextField(
                                   title: 'Prompt', isPrompt: true),
                             ),
+                            OutlinedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    int randomIndex = Random()
+                                        .nextInt(surpriseMePrompts.length);
+                                    prompt = surpriseMePrompts[randomIndex];
+                                    promptController.text = prompt;
+                                  });
+                                },
+                                child: Text('Surprize me')),
                             SizedBox(
                               height: size.height / 20,
                             ),
@@ -264,12 +277,11 @@ class _CreatePromptState extends State<CreatePrompt> {
 
   Widget CustomTextField({String title = '', bool isPrompt = false}) {
     return CupertinoSearchTextField(
-      // controller: controller,
+      controller: isPrompt ? promptController : nameController,
       placeholder: title,
       padding: !isPrompt
           ? EdgeInsetsDirectional.fromSTEB(5.5, 15, 5.5, 15)
           : EdgeInsetsDirectional.fromSTEB(5.5, 25, 5.5, 25),
-
       prefixIcon: Container(),
       onChanged: (value) {
         setState(() {
