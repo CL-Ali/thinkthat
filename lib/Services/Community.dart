@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+import 'package:get/route_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:thinkthat/models/promptModel.dart';
 import 'package:thinkthat/utils/constant.dart';
@@ -22,7 +24,7 @@ class CommunityApi {
     }
   }
 
-  static Future<List<Post>> postPromptApi(Post post) async {
+  static Future<bool> postPromptApi(Post post) async {
     http.Response response = await http.post(
       Uri.parse('$URL/post'),
       headers: <String, String>{
@@ -35,12 +37,14 @@ class CommunityApi {
       }),
     );
 
-    if (response.statusCode == 200) {
-      List body = (jsonDecode(response.body))['data'];
-      List<Post> list = Post.convertIntoList(body);
-      return list;
-    } else {
-      return [Post(title: response.statusCode.toString())];
+    if (response.statusCode < 200 || response.statusCode > 299) {
+      Get.snackbar(
+        "Alert",
+        "Status Code : ${response.statusCode.toString()} and Reason : ${response.reasonPhrase}",
+        backgroundColor: CupertinoColors.inactiveGray,
+      );
+      return false;
     }
+    return true;
   }
 }

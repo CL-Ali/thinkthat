@@ -4,6 +4,8 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/route_manager.dart';
+import 'package:get/utils.dart';
 import 'package:http/http.dart';
 import 'package:thinkthat/Services/Community.dart';
 import 'package:thinkthat/Services/GenPrompt.dart';
@@ -129,12 +131,17 @@ class _CreatePromptState extends State<CreatePrompt> {
                                               });
                                               var image = await GenPromptApi
                                                   .genPromptApi(prompt: prompt);
-                                              setState(() {
-                                                responsePrompt = (jsonDecode(
-                                                    image))['photo'];
-                                                bytes = base64
-                                                    .decode(responsePrompt);
-                                              });
+                                              if (image.isNumericOnly) {
+                                                Get.snackbar("Alert",
+                                                    "Status Code : ${image.toString()}");
+                                              } else {
+                                                setState(() {
+                                                  responsePrompt = (jsonDecode(
+                                                      image))['photo'];
+                                                  bytes = base64
+                                                      .decode(responsePrompt);
+                                                });
+                                              }
                                             }
                                             setState(() {
                                               isDone = true;
@@ -182,23 +189,21 @@ class _CreatePromptState extends State<CreatePrompt> {
                                               });
                                               String base64String =
                                                   "data:image/jpeg;base64,$responsePrompt";
-                                              await CommunityApi.postPromptApi(
-                                                  Post(
+                                              bool isPosted = await CommunityApi
+                                                  .postPromptApi(Post(
                                                       imageUrl: base64String,
                                                       title: name,
                                                       prompt: prompt));
-
                                               setState(() {
                                                 isDone = true;
                                                 isShared = true;
                                                 isSharing = false;
                                               });
-                                              Navigator.pushAndRemoveUntil(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          HomeScreen()),
-                                                  (route) => false);
+                                              if (isPosted) {
+                                                Get.off(HomeScreen(),
+                                                    transition: Transition
+                                                        .circularReveal);
+                                              }
                                             }
                                           } catch (e) {
                                             setState(() {

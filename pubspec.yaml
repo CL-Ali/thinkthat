@@ -37,14 +37,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_staggered_grid_view:
   http: 
-  flutter_dotenv: 
-  transparent_image: 
+  # flutter_dotenv: 
+  # transparent_image: 
   path_provider:
   permission_handler:
   # photo_gallery: ^1.1.1
   photo_manager:
-  connectivity:
-  open_file:
+  cached_network_image:
+  get:
+  # connectivity:
+  # open_file:
 dev_dependencies:
   flutter_test:
     sdk: flutter

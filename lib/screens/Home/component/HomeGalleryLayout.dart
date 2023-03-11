@@ -19,28 +19,21 @@ class GalleryLayout extends StatelessWidget {
   final List<Post>? list;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // height: size.height,
-      height: size.height - (size.height / 4),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: MasonryGridView.count(
-          physics: isphysics
-              ? AlwaysScrollableScrollPhysics()
-              : NeverScrollableScrollPhysics(),
-          crossAxisCount: 2,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-          itemCount: list!.length,
-          itemBuilder: (context, index) {
-            Post post = list![index];
-            return Column(
-              children: [
-                ImageLayout(post: post, isSearching: isSearching),
-              ],
-            );
-          },
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: MasonryGridView.count(
+        crossAxisCount: 2,
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+        itemCount: list!.length,
+        itemBuilder: (context, index) {
+          Post post = list![index];
+          return Column(
+            children: [
+              ImageLayout(post: post, isSearching: isSearching),
+            ],
+          );
+        },
       ),
     );
   }

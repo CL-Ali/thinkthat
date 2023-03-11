@@ -2,20 +2,41 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:http/http.dart';
 import 'package:thinkthat/models/promptModel.dart';
 import 'package:thinkthat/screens/Home/component/HomeImageLayout.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:thinkthat/utils/constant.dart';
 
-class ImageLayout extends StatelessWidget {
+class ImageLayout extends StatefulWidget {
   const ImageLayout({
     super.key,
     required this.post,
     this.isSearching,
-    this.isCreatePrompt,
+    this.isCreatePrompt = false,
+    this.isGallery = false,
   });
 
   final Post post;
   final bool? isSearching;
-  final bool? isCreatePrompt;
+  final bool isCreatePrompt;
+  final bool isGallery;
+
+  @override
+  State<ImageLayout> createState() => _ImageLayoutState();
+}
+
+class _ImageLayoutState extends State<ImageLayout> {
+  List<Post> suggestionList = [];
+  @override
+  void initState() {
+    if (!widget.isCreatePrompt && !widget.isGallery) {
+      suggestionList =
+          Post.searchList(widget.post.title, isPostTap: true, posts: posts);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,63 +47,40 @@ class ImageLayout extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ImageScreen(
-                            post: post,
-                            isCreateImage:
-                                isCreatePrompt == null ? false : isCreatePrompt!
-
-                            // ? true
-                            // : false,
-                            )));
+                !widget.isCreatePrompt
+                    ? Get.to(
+                        HomeGalleryLayoutScreen(
+                            post: widget.post, suggestionList: suggestionList),
+                        transition: Transition.downToUp,
+                        duration: Duration(milliseconds: 500),
+                        preventDuplicates: false)
+                    : Get.to(
+                        ImageScreen(
+                            post: widget.post,
+                            isCreateImage: widget.isCreatePrompt),
+                        transition: Transition.cupertino);
               },
-              child: isCreatePrompt == null || !isCreatePrompt!
-                  ? Image.network(
-                      post.imageUrl,
-                      fit: BoxFit.cover,
+              child: widget.isCreatePrompt == null || !widget.isCreatePrompt
+                  ? CachedNetworkImage(
+                      imageUrl: widget.post.imageUrl,
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                      // fit: BoxFit.cover,
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) => SizedBox(
+                        height: 300,
+                        width: 300,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
                     )
                   : Image.memory(
-                      base64.decode(post.imageUrl),
+                      base64.decode(widget.post.imageUrl),
                       fit: BoxFit.cover,
                       height: 300,
                       width: 300,
                     ),
             ),
-            // Container(
-            //   decoration: BoxDecoration(
-            //     color: Colors.black.withOpacity(0.2),
-            //     // color: Colors.transparent,
-            //   ),
-            //   child: Padding(
-            //     padding:
-            //         const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
-            //     child: Row(
-            //       crossAxisAlignment: CrossAxisAlignment.center,
-            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //       children: [
-            //         Text(
-            //           post.title,
-            //           style: const TextStyle(
-            //               fontWeight: FontWeight.w700,
-            //               color: Colors.white54,
-            //               fontSize: 12),
-            //         ),
-            //         GestureDetector(
-            //           onTap: () {
-            //             // optionModelSheet(context);
-            //           },
-            //           child: const Icon(
-            //             CupertinoIcons.down_arrow,
-            //             color: Colors.white54,
-            //             size: 15,
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // )
           ],
         ));
   }

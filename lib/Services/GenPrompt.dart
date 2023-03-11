@@ -18,7 +18,7 @@ class GenPromptApi {
       return response.body;
     } else {
       print('error generated');
-      return response.body;
+      return response.statusCode.toString();
     }
   }
 }

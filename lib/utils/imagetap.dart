@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:thinkthat/Services/downloadImage.dart';
 import 'package:thinkthat/models/promptModel.dart';
 import 'package:thinkthat/screens/Home/component/HomeImageLayout.dart';
@@ -38,15 +39,13 @@ class _ImageOnTapLayoutState extends State<ImageOnTapLayout> {
         GestureDetector(
           onTap: widget.isHomeImage && !widget.isPop
               ? () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ImageScreen(
-                              post: widget.post,
-                              isCreateImage: true,
-                              isGalleryImage: widget.isGalleryImage,
-                            )),
-                  );
+                  Get.to(
+                      ImageScreen(
+                        post: widget.post,
+                        isCreateImage: true,
+                        isGalleryImage: widget.isGalleryImage,
+                      ),
+                      transition: Transition.cupertino);
                 }
               : () {
                   // setState(() {

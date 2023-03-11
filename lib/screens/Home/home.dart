@@ -27,6 +27,31 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+// Stack(
+//       children: [
+//         ListView.builder(
+//           itemCount: widget.imageUrls.length,
+//           itemBuilder: (context, index) {
+//             return CachedNetworkImage(
+//               imageUrl: widget.imageUrls[index],
+//               errorWidget: (context, url, error) => Icon(Icons.error),
+//               fit: BoxFit.cover,
+//             );
+//           },
+//           onMomentumScrollBegin: (context) {
+//             setState(() {
+//               _isLoading = false;
+//             });
+//           },
+//           onMomentumScrollEnd: (context) {
+//             setState(() {
+//               _isLoading = true;
+//             });
+//           },
+//         ),
+//         if (_isLoading) CircularProgressIndicator(),
+//       ],
+//     );
   @override
   void initState() {
     preload();
@@ -40,17 +65,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: ListView(
+        body: Column(
           children: [
             _buildAppBar(size.height),
-            posts.isEmpty
+            posts.isEmpty || (isSearching && searchPosts.isEmpty)
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : GalleryLayout(
-                    size: size,
-                    isSearching: isSearching,
-                    list: isSearching ? searchPosts : posts,
+                : Expanded(
+                    child: GalleryLayout(
+                      size: size,
+                      isSearching: isSearching,
+                      list: isSearching ? searchPosts : posts,
+                    ),
                   ),
           ],
         ),
@@ -128,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     isSearching = false;
                   } else {
                     isSearching = true;
-                    Post.searchList(searchImage, posts: posts);
+                    searchPosts = Post.searchList(searchImage, posts: posts);
                   }
                 },
                 // decoration: InputDecoration(
