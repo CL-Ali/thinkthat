@@ -4,9 +4,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:thinkthat/models/promptModel.dart';
-import 'package:thinkthat/screens/ImageScreen/ImageScreen.dart';
-import 'package:thinkthat/screens/Home/components/HomeImageLayout.dart';
+import 'package:thinkthat/Models/PromptModel.dart';
+import 'package:thinkthat/Screens/ImageScreen/ImageScreen.dart';
+import 'package:thinkthat/Screens/HomeScreen/Components/HomeImageLayout.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:thinkthat/utils/constant.dart';
 

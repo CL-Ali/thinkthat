@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:thinkthat/models/promptModel.dart';
+import 'package:thinkthat/Models/PromptModel.dart';
 
 const String URL = 'https://ai-image-generated-with-firebase.vercel.app/api/v1';
 const appbarTextStyle = TextStyle();

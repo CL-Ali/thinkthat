@@ -9,9 +9,9 @@ import 'package:get/route_manager.dart';
 import 'package:get/utils.dart';
 import 'package:thinkthat/Services/Community.dart';
 import 'package:thinkthat/Services/GenPrompt.dart';
-import 'package:thinkthat/models/promptModel.dart';
-import 'package:thinkthat/screens/Home/home.dart';
-import 'package:thinkthat/screens/ImageScreen/components/imageLayout.dart';
+import 'package:thinkthat/Models/PromptModel.dart';
+import 'package:thinkthat/Screens/HomeScreen/home.dart';
+import 'package:thinkthat/Screens/ImageScreen/components/imageLayout.dart';
 
 import '../../utils/constant.dart';
 

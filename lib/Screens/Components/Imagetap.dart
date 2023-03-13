@@ -7,8 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:thinkthat/Services/downloadImage.dart';
-import 'package:thinkthat/models/promptModel.dart';
-import 'package:thinkthat/screens/ImageScreen/ImageScreen.dart';
+import 'package:thinkthat/Models/PromptModel.dart';
+import 'package:thinkthat/Screens/ImageScreen/ImageScreen.dart';
 import 'package:http/http.dart' as http;
 
 class ImageOnTapLayout extends StatefulWidget {

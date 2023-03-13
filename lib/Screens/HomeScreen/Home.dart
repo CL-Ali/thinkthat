@@ -3,9 +3,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:thinkthat/Services/Community.dart';
-import 'package:thinkthat/models/promptModel.dart';
-import 'package:thinkthat/screens/CreatePost/createPost.dart';
-import 'package:thinkthat/screens/Components/GalleryLayout.dart';
+import 'package:thinkthat/Models/PromptModel.dart';
+import 'package:thinkthat/Screens/CreatePost/CreatePost.dart';
+import 'package:thinkthat/Screens/Components/GalleryLayout.dart';
 import 'package:thinkthat/utils/constant.dart';
 
 class HomeScreen extends StatefulWidget {

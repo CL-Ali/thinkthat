@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:thinkthat/utils/constant.dart';
+import 'package:thinkthat/Utils/constant.dart';
 
 class GenPromptApi {
   static Future<String> genPromptApi({String prompt = ''}) async {
