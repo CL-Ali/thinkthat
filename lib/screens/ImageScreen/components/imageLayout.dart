@@ -1,11 +1,12 @@
+// ignore_for_file: file_names
+
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:http/http.dart';
 import 'package:thinkthat/models/promptModel.dart';
-import 'package:thinkthat/screens/Home/component/HomeImageLayout.dart';
+import 'package:thinkthat/screens/ImageScreen/ImageScreen.dart';
+import 'package:thinkthat/screens/Home/components/HomeImageLayout.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:thinkthat/utils/constant.dart';
 
@@ -52,7 +53,7 @@ class _ImageLayoutState extends State<ImageLayout> {
                         HomeGalleryLayoutScreen(
                             post: widget.post, suggestionList: suggestionList),
                         transition: Transition.downToUp,
-                        duration: Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 500),
                         preventDuplicates: false)
                     : Get.to(
                         ImageScreen(
@@ -60,13 +61,13 @@ class _ImageLayoutState extends State<ImageLayout> {
                             isCreateImage: widget.isCreatePrompt),
                         transition: Transition.cupertino);
               },
-              child: widget.isCreatePrompt == null || !widget.isCreatePrompt
+              child: !widget.isCreatePrompt
                   ? CachedNetworkImage(
                       imageUrl: widget.post.imageUrl,
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                      // fit: BoxFit.cover,
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                       progressIndicatorBuilder:
-                          (context, url, downloadProgress) => SizedBox(
+                          (context, url, downloadProgress) => const SizedBox(
                         height: 300,
                         width: 300,
                         child: Center(

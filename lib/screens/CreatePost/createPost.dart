@@ -1,18 +1,17 @@
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables, non_constant_identifier_names
+
 import 'dart:convert';
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/utils.dart';
-import 'package:http/http.dart';
 import 'package:thinkthat/Services/Community.dart';
 import 'package:thinkthat/Services/GenPrompt.dart';
 import 'package:thinkthat/models/promptModel.dart';
 import 'package:thinkthat/screens/Home/home.dart';
-import 'package:thinkthat/utils/imageLayout.dart';
+import 'package:thinkthat/screens/ImageScreen/components/imageLayout.dart';
 
 import '../../utils/constant.dart';
 
@@ -41,7 +40,7 @@ class _CreatePromptState extends State<CreatePrompt> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: ListView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             _buildAppBar(size.height),
             SizedBox(
@@ -59,23 +58,11 @@ class _CreatePromptState extends State<CreatePrompt> {
                             Container(
                               width: double.infinity,
                               alignment: Alignment.centerLeft,
-                              child: Text(
+                              child: const Text(
                                 'Create imaginative and visually stunning images through ThinkThat AI and share them with the community.\n',
                                 textAlign: TextAlign.start,
                               ),
                             ),
-                            // Container(
-                            //   width: double.infinity,
-                            //   child: Row(
-                            //     children: [
-                            //       Text('Copyright © 2023 '),
-                            //       Text('ALPHA.',
-                            //           style: const TextStyle(
-                            //               fontWeight: FontWeight.bold)),
-                            //       Text('All rights reserved.'),
-                            //     ],
-                            //   ),
-                            // ),
                             SizedBox(
                               height: size.height / 30,
                             ),
@@ -100,7 +87,7 @@ class _CreatePromptState extends State<CreatePrompt> {
                                     promptController.text = prompt;
                                   });
                                 },
-                                child: Text('Surprize me')),
+                                child: const Text('Surprize me')),
                             SizedBox(
                               height: size.height / 20,
                             ),
@@ -111,7 +98,7 @@ class _CreatePromptState extends State<CreatePrompt> {
                                         post: Post(imageUrl: responsePrompt),
                                         isSearching: false,
                                         isCreatePrompt: true)
-                                    : SizedBox(
+                                    : const SizedBox(
                                         height: 300,
                                         width: 300,
                                         child: Center(
@@ -176,7 +163,7 @@ class _CreatePromptState extends State<CreatePrompt> {
                             SizedBox(
                               height: size.height / 30,
                             ),
-                            Text(
+                            const Text(
                                 'Once you have created the image you want, you can share it with others in the community'),
                             SizedBox(
                               height: size.height / 30,
@@ -213,7 +200,7 @@ class _CreatePromptState extends State<CreatePrompt> {
                                                 isSharing = false;
                                               });
                                               if (isPosted) {
-                                                Get.off(HomeScreen(),
+                                                Get.off(const HomeScreen(),
                                                     transition: Transition
                                                         .circularReveal);
                                               }
@@ -247,29 +234,22 @@ class _CreatePromptState extends State<CreatePrompt> {
     return Container(
       height: height / 10,
       width: double.infinity,
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       child: Row(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18.0),
             child: Text(
               "Create",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               // appbarTextStyle,
             ),
           ),
-          Spacer(),
-          SizedBox(width: 16.0),
+          const Spacer(),
+          const SizedBox(width: 16.0),
           CloseButton(
             onPressed: () => Navigator.pop(context),
           )
-          // Image.asset(
-
-          //   'assets/images/logo.png',
-          //   fit: BoxFit.cover,
-          //   height: 40,
-          //   width: 40,
-          // ),
         ],
       ),
     );
@@ -280,8 +260,8 @@ class _CreatePromptState extends State<CreatePrompt> {
       controller: isPrompt ? promptController : nameController,
       placeholder: title,
       padding: !isPrompt
-          ? EdgeInsetsDirectional.fromSTEB(5.5, 15, 5.5, 15)
-          : EdgeInsetsDirectional.fromSTEB(5.5, 25, 5.5, 25),
+          ? const EdgeInsetsDirectional.fromSTEB(5.5, 15, 5.5, 15)
+          : const EdgeInsetsDirectional.fromSTEB(5.5, 25, 5.5, 25),
       prefixIcon: Container(),
       onChanged: (value) {
         setState(() {

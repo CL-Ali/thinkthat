@@ -1,11 +1,11 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:thinkthat/Services/Community.dart';
 import 'package:thinkthat/models/promptModel.dart';
 import 'package:thinkthat/screens/CreatePost/createPost.dart';
-import 'package:thinkthat/screens/Home/component/HomeGalleryLayout.dart';
-import 'package:thinkthat/utils/imagetap.dart';
+import 'package:thinkthat/screens/Components/GalleryLayout.dart';
 import 'package:thinkthat/utils/constant.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -27,31 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-// Stack(
-//       children: [
-//         ListView.builder(
-//           itemCount: widget.imageUrls.length,
-//           itemBuilder: (context, index) {
-//             return CachedNetworkImage(
-//               imageUrl: widget.imageUrls[index],
-//               errorWidget: (context, url, error) => Icon(Icons.error),
-//               fit: BoxFit.cover,
-//             );
-//           },
-//           onMomentumScrollBegin: (context) {
-//             setState(() {
-//               _isLoading = false;
-//             });
-//           },
-//           onMomentumScrollEnd: (context) {
-//             setState(() {
-//               _isLoading = true;
-//             });
-//           },
-//         ),
-//         if (_isLoading) CircularProgressIndicator(),
-//       ],
-//     );
   @override
   void initState() {
     preload();
@@ -69,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             _buildAppBar(size.height),
             posts.isEmpty || (isSearching && searchPosts.isEmpty)
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : Expanded(
@@ -82,19 +57,19 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-        floatingActionButton: Container(
+        floatingActionButton: SizedBox(
           height: 80,
           width: 80,
           child: FloatingActionButton(
-            // backgroundColor: Colors.orange.withOpacity(0.8),
             backgroundColor: Colors.white,
             isExtended: true,
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CreatePrompt()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const CreatePrompt()));
             },
-            child: Icon(
+            child: const Icon(
               Icons.add,
               color: Colors.black,
               size: 40,
@@ -109,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       height: height / 5,
       width: double.infinity,
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -122,25 +97,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 // ?
                 Container(
                     alignment: Alignment.centerLeft,
-                    child: Text('ThinkThat',
+                    child: const Text('ThinkThat',
                         style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Cupertino'))),
-                SizedBox(width: 16.0),
+                const SizedBox(width: 16.0),
                 Image.asset(
                   'assets/images/logo.png',
                   fit: BoxFit.cover,
                   height: 40,
                   width: 40,
                 ),
-                // CircleAvatar(
-                //   backgroundImage: AssetImage('assets/images/logo.png'),
-                // ),
               ],
             ),
           ),
-
           Flexible(
             child: SizedBox(
               height: 50,
@@ -151,44 +122,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   setState(() {
                     searchImage = value;
                   });
-                  if (searchImage.isEmpty || searchImage == null) {
+                  if (searchImage.isEmpty) {
                     isSearching = false;
                   } else {
                     isSearching = true;
                     searchPosts = Post.searchList(searchImage, posts: posts);
                   }
                 },
-                // decoration: InputDecoration(
-                //   hintText: 'Search',
-                //   prefixIcon: Icon(Icons.search),
-                //   suffixIcon: IconButton(
-                //     icon: Icon(Icons.close),
-                //     onPressed: () {
-                //       setState(() {
-                //         isSearch = false;
-                //       });
-                //     },
-                //   ),
-                // ),
               ),
             ),
           ),
-          // : Row(
-          //     children: [
-          //       IconButton(
-          //         icon: Icon(Icons.search, size: 27),
-          //         onPressed: () {
-          //           setState(() {
-          //             isSearch = true;
-          //           });
-          //         },
-          //       ),
-          //       Text('Search',
-          //           style: TextStyle(
-          //               fontSize: 20, fontWeight: FontWeight.bold))
-          //     ],
-          // ),
-          // if (!isSearch) Spacer(),
         ],
       ),
     );

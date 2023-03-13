@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class Post {
   String id;
   String imageUrl;
@@ -13,14 +15,14 @@ class Post {
   static List<Post> convertIntoList(List response) {
     List<Post> tList = [];
     Post post;
-    response.forEach((element) {
+    for (var element in response) {
       post = Post()
         ..id = element['id'].toString()
         ..prompt = element['prompt'].toString()
         ..imageUrl = element['photo']
         ..title = element['name'].toString();
       tList.add(post);
-    });
+    }
     return tList;
   }
 
@@ -28,7 +30,7 @@ class Post {
       {List<Post> posts = const [], bool isPostTap = false}) {
     List<Post> tList = [];
     if (posts.isNotEmpty) {
-      posts.forEach((element) {
+      for (var element in posts) {
         if (isPostTap) {
           if (element.title.toLowerCase() != match.toLowerCase() &&
               element.title
@@ -41,7 +43,7 @@ class Post {
             tList.add(element);
           }
         }
-      });
+      }
     }
     return tList;
   }
