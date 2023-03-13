@@ -1,8 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:thinkthat/models/promptModel.dart';
-import 'package:thinkthat/screens/Components/imagetap.dart';
+import 'package:thinkthat/Models/PromptModel.dart';
+import 'package:thinkthat/Screens/Components/Imagetap.dart';
 
 class ImageScreen extends StatefulWidget {
   final bool isCreateImage;

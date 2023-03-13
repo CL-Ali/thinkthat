@@ -8,7 +8,7 @@ import 'package:thinkthat/Models/PromptModel.dart';
 import 'package:thinkthat/Screens/ImageScreen/ImageScreen.dart';
 import 'package:thinkthat/Screens/HomeScreen/Components/HomeImageLayout.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:thinkthat/utils/constant.dart';
+import 'package:thinkthat/Utils/Constant.dart';
 
 class ImageLayout extends StatefulWidget {
   const ImageLayout({

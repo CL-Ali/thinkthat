@@ -1,9 +1,9 @@
 // ignore_for_file: must_be_immutable, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:thinkthat/models/promptModel.dart';
-import 'package:thinkthat/screens/Components/GalleryLayout.dart';
-import 'package:thinkthat/screens/Components/imagetap.dart';
+import 'package:thinkthat/Models/PromptModel.dart';
+import 'package:thinkthat/Screens/Components/GalleryLayout.dart';
+import 'package:thinkthat/Screens/Components/Imagetap.dart';
 
 class HomeGalleryLayoutScreen extends StatelessWidget {
   HomeGalleryLayoutScreen({

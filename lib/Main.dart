@@ -4,7 +4,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:thinkthat/screens/Home/home.dart';
+import 'package:thinkthat/Screens/HomeScreen/Home.dart';
 
 void main() {
   runApp(const MyApp());

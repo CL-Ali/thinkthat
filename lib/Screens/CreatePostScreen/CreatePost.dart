@@ -10,10 +10,10 @@ import 'package:get/utils.dart';
 import 'package:thinkthat/Services/Community.dart';
 import 'package:thinkthat/Services/GenPrompt.dart';
 import 'package:thinkthat/Models/PromptModel.dart';
-import 'package:thinkthat/Screens/HomeScreen/home.dart';
-import 'package:thinkthat/Screens/ImageScreen/components/imageLayout.dart';
+import 'package:thinkthat/Screens/HomeScreen/Home.dart';
+import 'package:thinkthat/Screens/ImageScreen/Components/ImageLayout.dart';
 
-import '../../utils/constant.dart';
+import '../../Utils/Constant.dart';
 
 class CreatePrompt extends StatefulWidget {
   const CreatePrompt({super.key});

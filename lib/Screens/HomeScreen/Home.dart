@@ -6,7 +6,7 @@ import 'package:thinkthat/Services/Community.dart';
 import 'package:thinkthat/Models/PromptModel.dart';
 import 'package:thinkthat/Screens/CreatePost/CreatePost.dart';
 import 'package:thinkthat/Screens/Components/GalleryLayout.dart';
-import 'package:thinkthat/utils/constant.dart';
+import 'package:thinkthat/Utils/Constant.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

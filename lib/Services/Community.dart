@@ -5,8 +5,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:get/route_manager.dart';
 import 'package:http/http.dart' as http;
-import 'package:thinkthat/models/promptModel.dart';
-import 'package:thinkthat/utils/constant.dart';
+import 'package:thinkthat/Models/PromptModel.dart';
+import 'package:thinkthat/Utils/Constant.dart';
 
 class CommunityApi {
   static Future<List<Post>> getPromptApi({String prompt = ''}) async {

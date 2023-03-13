@@ -2,8 +2,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:thinkthat/models/promptModel.dart';
-import 'package:thinkthat/screens/ImageScreen/components/imageLayout.dart';
+import 'package:thinkthat/Models/PromptModel.dart';
+import 'package:thinkthat/Screens/ImageScreen/Components/ImageLayout.dart';
 
 class GalleryLayout extends StatelessWidget {
   const GalleryLayout({

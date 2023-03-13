@@ -6,7 +6,7 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:thinkthat/Services/downloadImage.dart';
+import 'package:thinkthat/Services/DownloadImage.dart';
 import 'package:thinkthat/Models/PromptModel.dart';
 import 'package:thinkthat/Screens/ImageScreen/ImageScreen.dart';
 import 'package:http/http.dart' as http;
